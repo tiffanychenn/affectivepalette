@@ -38,7 +38,7 @@ def clean_text(text):
         neg += swn_synset.neg_score()
         neu += swn_synset.obj_score() 
         #  collection.tf_idf(t[0], new_text) 
-    return (pos / len(new_text.split()), neg / len(new_text.split()), neu / len(new_text.split()))
+    return (pos / len(new_text.split()), neg / len(new_text.split()))
 
 
 def penn_to_wn(tag):
