@@ -73,4 +73,4 @@ def test_model_func():
                     neu_count += 1
     return pos_count, neg_count, neu_count
 
-print(test_model_func())
+# print(test_model_func())
