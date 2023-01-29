@@ -5,10 +5,12 @@ from nltk.text import TextCollection
 from nltk.corpus import wordnet as wn
 from nltk.corpus import sentiwordnet as swn
 from nltk.corpus import stopwords
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import os
 
 wnl = WordNetLemmatizer()
 stop_words = set(stopwords.words('english')) 
+analyzer = SentimentIntensityAnalyzer()
 
 def clean_text(text):
     '''
@@ -24,21 +26,24 @@ def clean_text(text):
     pos_tags = [(t[0], penn_to_wn(t[1])) for t in pos_tags if penn_to_wn(t[1])]
 
     # compute things
-    collection = TextCollection(tokens)
-    new_text = "".join([t + " " for t in tokens])
+    # collection = TextCollection(tokens)
+    new_text = "".join([t[0] + " " for t in pos_tags])
 
-    pos = neg = neu = 0
-    for t in pos_tags:
-        synsets = wn.synsets(t[0], pos=t[1]) # grab the most common one
-        if not synsets:
-            continue
-        synset = synsets[0]
-        swn_synset = swn.senti_synset(synset.name())
-        pos += swn_synset.pos_score() 
-        neg += swn_synset.neg_score()
-        neu += swn_synset.obj_score() 
-        #  collection.tf_idf(t[0], new_text) 
-    return (pos / len(new_text.split()), neg / len(new_text.split()))
+    # pos = neg = neu = 0
+    # for t in pos_tags:
+    #     synsets = wn.synsets(t[0], pos=t[1]) # grab the most common one
+    #     if not synsets:
+    #         continue
+    #     synset = synsets[0]
+    #     swn_synset = swn.senti_synset(synset.name())
+    #     pos += swn_synset.pos_score() 
+    #     neg += swn_synset.neg_score()
+    #     neu += swn_synset.obj_score() 
+        
+        #  collection.tf_idf(t[0], new_text)
+    # print(analyzer.polarity_scores(new_text)["compound"])
+    return analyzer.polarity_scores(new_text)["compound"]
+    # return analyzer.polarity_scores(new_text)["pos"], analyzer.polarity_scores(new_text)["neg"], analyzer.polarity_scores(new_text)["neu"]
 
 
 def penn_to_wn(tag):
@@ -64,10 +69,10 @@ def test_model_func():
             with open(path + "/" + filename) as f:
                 lines = f.readlines()
                 text = "".join(lines)
-                pos, neg, _ = clean_text(text)
-                if pos > neg:
+                result = clean_text(text)
+                if result > 0.1:
                     pos_count += 1
-                elif pos < neg:
+                elif result < -0.1:
                     neg_count += 1
                 else:
                     neu_count += 1

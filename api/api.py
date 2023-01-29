@@ -37,7 +37,8 @@ def panas():
 
 @app.route("/newsarticle", methods=["POST"])
 def newsarticle():
-    return {"result": clean_text(request.form['text'])}
+    result = clean_text(request.form['text'])
+    return {"result": [result if result > 0 else 0, -result if result < 0 else 0]}
 
 if __name__ == "__main__":
     app.run(debug=True)
