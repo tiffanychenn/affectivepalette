@@ -45,15 +45,17 @@ const _submitPanasForm = () => {
 
   fetch('http://127.0.0.1:5000/panas', {
     method: "POST",
-    body: panasFormResults,
+    body: JSON.stringify(panasFormResults),
     headers: {
       'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
-      'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+      'Access-Control-Allow-Origin':'*',
+      'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS',
+      'Content-Type': 'application/json; charset=utf-8'
     },
   }).then(response => {
     return response.json();
   }).then(data =>{
-      console.log(data);
+      console.log(data["result"]);
   }).catch(error => {
     console.log(error);
   })

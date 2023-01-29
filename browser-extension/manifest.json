@@ -1,7 +1,7 @@
   {
     "name": "AffectivePalette",
     "version": "1.0",
-    "permissions": ["activeTab", "declarativeContent", "storage"],
+    "permissions": ["activeTab", "declarativeContent", "storage", "http://*/"],
     "options_page": "options.html",
     "background": {
       "scripts": ["background.js"],
