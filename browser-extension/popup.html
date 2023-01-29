@@ -1,10 +1,185 @@
   <!DOCTYPE html>
   <html>
     <head>
+      <style>
+        body {
+          height: 600px;
+          width: 800px;
+        }
+        html {
+          height: 600px;
+          width: 800px;
+        }
+      </style>
     </head>
     <body>
-      hello hi
-      <script src="popup.js">
-      </script>
+      <h2>Styling Form Controls</h2>
+      <form id="register" name="register" action="#" method="post">
+        <fieldset>
+            <p>Please indicate the extent you <strong>currently</strong> feel this way on a scale from 1-5, where 1 is the least and 5 is the most:</p>
+            <div>
+              Interested: 
+              <input type="radio" name="interested" value="1" required> 1
+              <input type="radio" name="interested" value="2"> 2
+              <input type="radio" name="interested" value="3"> 3
+              <input type="radio" name="interested" value="4"> 4
+              <input type="radio" name="interested" value="5"> 5
+            </div>
+            <div>
+              Distressed: 
+              <input type="radio" name="distressed" value="1" required> 1
+              <input type="radio" name="distressed" value="2"> 2
+              <input type="radio" name="distressed" value="3"> 3
+              <input type="radio" name="distressed" value="4"> 4
+              <input type="radio" name="distressed" value="5"> 5
+            </div>
+            <div>
+              Excited: 
+              <input type="radio" name="excited" value="1" required> 1
+              <input type="radio" name="excited" value="2"> 2
+              <input type="radio" name="excited" value="3"> 3
+              <input type="radio" name="excited" value="4"> 4
+              <input type="radio" name="excited" value="5"> 5
+            </div>
+            <div>
+              Upset: 
+              <input type="radio" name="upset" value="1" required> 1
+              <input type="radio" name="upset" value="2"> 2
+              <input type="radio" name="upset" value="3"> 3
+              <input type="radio" name="upset" value="4"> 4
+              <input type="radio" name="upset" value="5"> 5
+            </div>
+            <div>
+              Strong: 
+              <input type="radio" name="strong" value="1" required> 1
+              <input type="radio" name="strong" value="2"> 2
+              <input type="radio" name="strong" value="3"> 3
+              <input type="radio" name="strong" value="4"> 4
+              <input type="radio" name="strong" value="5"> 5
+            </div>
+            <div>
+              Guilty: 
+              <input type="radio" name="guilty" value="1" required> 1
+              <input type="radio" name="guilty" value="2"> 2
+              <input type="radio" name="guilty" value="3"> 3
+              <input type="radio" name="guilty" value="4"> 4
+              <input type="radio" name="guilty" value="5"> 5
+            </div>
+            <div>
+              Scared: 
+              <input type="radio" name="scared" value="1" required> 1
+              <input type="radio" name="scared" value="2"> 2
+              <input type="radio" name="scared" value="3"> 3
+              <input type="radio" name="scared" value="4"> 4
+              <input type="radio" name="scared" value="5"> 5
+            </div>
+            <div>
+              Hostile: 
+              <input type="radio" name="hostile" value="1" required> 1
+              <input type="radio" name="hostile" value="2"> 2
+              <input type="radio" name="hostile" value="3"> 3
+              <input type="radio" name="hostile" value="4"> 4
+              <input type="radio" name="hostile" value="5"> 5
+            </div>
+            <div>
+              Enthusiastic: 
+              <input type="radio" name="enthusiastic" value="1" required> 1
+              <input type="radio" name="enthusiastic" value="2"> 2
+              <input type="radio" name="enthusiastic" value="3"> 3
+              <input type="radio" name="enthusiastic" value="4"> 4
+              <input type="radio" name="enthusiastic" value="5"> 5
+            </div>
+            <div>
+              Proud: 
+              <input type="radio" name="proud" value="1" required> 1
+              <input type="radio" name="proud" value="2"> 2
+              <input type="radio" name="proud" value="3"> 3
+              <input type="radio" name="proud" value="4"> 4
+              <input type="radio" name="proud" value="5"> 5
+            </div>
+            <div>
+              Irritable: 
+              <input type="radio" name="irritable" value="1" required> 1
+              <input type="radio" name="irritable" value="2"> 2
+              <input type="radio" name="irritable" value="3"> 3
+              <input type="radio" name="irritable" value="4"> 4
+              <input type="radio" name="irritable" value="5"> 5
+            </div>
+            <div>
+              Alert: 
+              <input type="radio" name="alert" value="1" required> 1
+              <input type="radio" name="alert" value="2"> 2
+              <input type="radio" name="alert" value="3"> 3
+              <input type="radio" name="alert" value="4"> 4
+              <input type="radio" name="alert" value="5"> 5
+            </div>
+            <div>
+              Ashamed: 
+              <input type="radio" name="ashamed" value="1" required> 1
+              <input type="radio" name="ashamed" value="2"> 2
+              <input type="radio" name="ashamed" value="3"> 3
+              <input type="radio" name="ashamed" value="4"> 4
+              <input type="radio" name="ashamed" value="5"> 5
+            </div>
+            <div>
+              Inspired: 
+              <input type="radio" name="inspired" value="1" required> 1
+              <input type="radio" name="inspired" value="2"> 2
+              <input type="radio" name="inspired" value="3"> 3
+              <input type="radio" name="inspired" value="4"> 4
+              <input type="radio" name="inspired" value="5"> 5
+            </div>
+            <div>
+              Nervous: 
+              <input type="radio" name="nervous" value="1" required> 1
+              <input type="radio" name="nervous" value="2"> 2
+              <input type="radio" name="nervous" value="3"> 3
+              <input type="radio" name="nervous" value="4"> 4
+              <input type="radio" name="nervous" value="5"> 5
+            </div>
+            <div>
+              Determined: 
+              <input type="radio" name="determined" value="1" required> 1
+              <input type="radio" name="determined" value="2"> 2
+              <input type="radio" name="determined" value="3"> 3
+              <input type="radio" name="determined" value="4"> 4
+              <input type="radio" name="determined" value="5"> 5
+            </div>
+            <div>
+              Attentive: 
+              <input type="radio" name="attentive" value="1" required> 1
+              <input type="radio" name="attentive" value="2"> 2
+              <input type="radio" name="attentive" value="3"> 3
+              <input type="radio" name="attentive" value="4"> 4
+              <input type="radio" name="attentive" value="5"> 5
+            </div>
+            <div>
+              Jittery: 
+              <input type="radio" name="jittery" value="1" required> 1
+              <input type="radio" name="jittery" value="2"> 2
+              <input type="radio" name="jittery" value="3"> 3
+              <input type="radio" name="jittery" value="4"> 4
+              <input type="radio" name="jittery" value="5"> 5
+            </div>
+            <div>
+              Active: 
+              <input type="radio" name="active" value="1" required> 1
+              <input type="radio" name="active" value="2"> 2
+              <input type="radio" name="active" value="3"> 3
+              <input type="radio" name="active" value="4"> 4
+              <input type="radio" name="active" value="5"> 5
+            </div>
+            <div>
+              Afraid: 
+              <input type="radio" name="afraid" value="1" required> 1
+              <input type="radio" name="afraid" value="2"> 2
+              <input type="radio" name="afraid" value="3"> 3
+              <input type="radio" name="afraid" value="4"> 4
+              <input type="radio" name="afraid" value="5"> 5
+            </div>
+            <input type="submit" id="submit"/>
+        </fieldset>
+      </form>
+      <script src="popup.js"></script>
     </body>
   </html>
