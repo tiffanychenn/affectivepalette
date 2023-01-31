@@ -1,11 +1,20 @@
-function getText(){
-    return document.body.innerText
-}
-function getHTML(){
-    return document.body.outerHTML
+const ping = () => {
+    chrome.runtime.sendMessage(
+        {
+            contentScriptQuery: "postData"
+            , text: document.body.innerText,
+            url: 'http://127.0.0.1:5000/newsarticle'
+        }, function (response) {
+            if(chrome.runtime.lastError) {
+                setTimeout(ping, 1000);
+              }
+            else if (response != undefined && response != "") {
+                console.log(response);
+            }
+            else {
+                console.log(null);
+            }
+        });
 }
 
-setInterval(() => {
-    console.log(getText());             //Gives you all the text on the page
-    console.log(getHTML());             //Gives you the whole HTML of the pages
-}, 1000);
+ping();

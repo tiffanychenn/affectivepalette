@@ -4,9 +4,21 @@
 
 'use strict';
 
-chrome.runtime.onInstalled.addListener(function() {
-  chrome.storage.sync.set({color: '#3aa757'}, function() {
-    console.log("The color is green.");
-  });
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {  
+  if (request.contentScriptQuery == "postData") {
+      fetch(request.url, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+            // 'Access-Control-Allow-Origin':'*',
+            // 'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS',
+            'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+          },
+          body: "text=" + request.text,
+      })
+          .then(response => {return response.json()})
+          .then(response => {console.log(response);})
+          .catch(error => console.log('Error:', error));
+      return true;
+  }
 });
-
