@@ -58,10 +58,36 @@ const _submitPanasForm = () => {
       console.log(data["result"]);
   }).catch(error => {
     console.log(error);
-  })
-  
+  })  
 }
+
+const checkEmotionReaderType = () => {
+  chrome.storage.local.get(["AffectivePaletteStatus"]).then((result) => {
+    const t = result["AffectivePaletteStatus"];
+    console.log(t);
+    if (t === "questionnaire") {
+      document.getElementById("questionnaire").setAttribute("checked", "true");
+    }
+    else if (t === "article") {
+      document.getElementById("article").setAttribute("checked", "true");
+    }
+    else {
+      document.getElementById("off").setAttribute("checked", "true");
+    }
+  });
+}
+
+checkEmotionReaderType();
 
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("submit").onclick = _submitPanasForm;
 });
+
+document.querySelectorAll('input[name="type"]').forEach((el) => 
+  el.addEventListener("change", function () {
+    const v = document.querySelector('input[name="type"]:checked').value;
+    chrome.storage.local.set({"AffectivePaletteStatus": v}).then(() => {
+      console.log("set to " + v);
+    });
+  })
+);
