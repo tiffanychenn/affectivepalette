@@ -17,7 +17,11 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
           body: "text=" + request.text,
       })
           .then(response => {return response.json()})
-          .then(response => {console.log(response);})
+          .then(data => {     
+                chrome.storage.local.set({"AffectivePaletteEmotionList": data["result"]}).then(() => {
+                console.log(data["result"]);
+            })
+            })
           .catch(error => console.log('Error:', error));
       return true;
   }

@@ -20,48 +20,50 @@ const _submitPanasForm = () => {
   const active = document.querySelector('input[name="active"]:checked').value;
   const afraid = document.querySelector('input[name="afraid"]:checked').value;
 
-  const panasFormResults = {
-    "interested": interested,
-    "distressed": distressed,
-    "excited": excited,
-    "upset": upset,
-    "strong": strong,
-    "guilty": guilty,
-    "scared": scared,
-    "hostile": hostile,
-    "enthusiastic": enthusiastic,
-    "proud": proud,
-    "irritable": irritable,
-    "alert": alert,
-    "ashamed": ashamed,
-    "inspired": inspired,
-    "nervous": nervous,
-    "determined": determined,
-    "attentive": attentive,
-    "jittery": jittery,
-    "active": active,
-    "afraid": afraid
-  }
+  const panasFormResults = 
+    "interested=" + interested +
+    "&distressed=" + distressed +
+    "&excited=" + excited +
+    "&upset=" + upset +
+    "&strong=" + strong +
+    "&guilty=" + guilty +
+    "&scared=" + scared +
+    "&hostile=" + hostile +
+    "&enthusiastic=" + enthusiastic +
+    "&proud=" + proud +
+    "&irritable=" + irritable +
+    "&alert=" + alert +
+    "&ashamed=" + ashamed +
+    "&inspired=" + inspired +
+    "&nervous=" + nervous +
+    "&determined=" + determined +
+    "&attentive=" + attentive +
+    "&jittery=" + jittery +
+    "&active=" + active +
+    "&afraid=" + afraid;
 
   fetch('http://127.0.0.1:5000/panas', {
     method: "POST",
-    body: JSON.stringify(panasFormResults),
+    body: panasFormResults,
     headers: {
       'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
-      'Access-Control-Allow-Origin':'*',
-      'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS',
-      'Content-Type': 'application/json; charset=utf-8'
+      // 'Access-Control-Allow-Origin':'*',
+      // 'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS',
+      'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
     },
   }).then(response => {
     return response.json();
   }).then(data =>{
-      console.log(data["result"]);
-  }).catch(error => {
+    console.log(data);
+      chrome.storage.local.set({"AffectivePaletteEmotionList": data["result"]}).then(() => {
+        console.log(data["result"]);
+      })
+    }).catch(error => {
     console.log(error);
   })  
 }
 
-const checkEmotionReaderType = () => {
+const _checkEmotionReaderType = () => {
   chrome.storage.local.get(["AffectivePaletteStatus"]).then((result) => {
     const t = result["AffectivePaletteStatus"];
     if (t === "questionnaire") {
@@ -79,7 +81,26 @@ const checkEmotionReaderType = () => {
   });
 }
 
-checkEmotionReaderType();
+const _ping = () => { 
+  chrome.runtime.sendMessage(
+  {
+      contentScriptQuery: "postData"
+      , text: document.body.innerText,
+      url: 'http://127.0.0.1:5000/newsarticle'
+  }, function (response) {
+      if(chrome.runtime.lastError) {
+          setTimeout(_ping, 1000);
+        }
+      else if (response != undefined && response != "") {
+          console.log(response);
+      }
+      else {
+          console.log(null);
+      }
+  });
+}
+
+_checkEmotionReaderType();
 
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("submit").onclick = _submitPanasForm;
@@ -90,12 +111,15 @@ document.querySelectorAll('input[name="type"]').forEach((el) =>
     const v = document.querySelector('input[name="type"]:checked').value;
     chrome.storage.local.set({"AffectivePaletteStatus": v}).then(() => {
       console.log("set to " + v);
+      chrome.storage.local.remove(["AffectivePaletteEmotionList"], () => {});
       if (v === "questionnaire") {
         document.getElementById("panas").setAttribute('style', 'visibility: visible');
       }
-      else {
+      else if (v === "article") {
         document.getElementById("panas").setAttribute('style', 'visibility: hidden');
+        _ping();
       }
+      else document.getElementById("panas").setAttribute('style', 'visibility: hidden');
     });
   })
 );

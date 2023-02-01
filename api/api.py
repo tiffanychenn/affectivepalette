@@ -12,28 +12,27 @@ def index():
 
 @app.route("/panas", methods=["POST"])
 def panas():
-    json = request.get_json()
     panas_scores = {
-            "interested": int(json['interested']), 
-            "alert": int(json['alert']), 
-            "attentive": int(json['attentive']), 
-            "excited": int(json['excited']), 
-            "enthusiastic": int(json['enthusiastic']), 
-            "inspired": int(json['inspired']), 
-            "proud": int(json['proud']), 
-            "strong": int(json['strong']), 
-            "determined": int(json['determined']), 
-            "active": int(json['active']), 
-            "upset": int(json['upset']), 
-            "jittery": int(json['jittery']), 
-            "nervous": int(json['nervous']), 
-            "distressed": int(json['distressed']), 
-            "guilty": int(json['guilty']), 
-            "ashamed": int(json['ashamed']), 
-            "hostile": int(json['hostile']), 
-            "irritable": int(json['irritable']), 
-            "scared": int(json['scared']), 
-            "afraid": int(json['afraid']), 
+            "interested": int(request.form['interested']), 
+            "alert": int(request.form['alert']), 
+            "attentive": int(request.form['attentive']), 
+            "excited": int(request.form['excited']), 
+            "enthusiastic": int(request.form['enthusiastic']), 
+            "inspired": int(request.form['inspired']), 
+            "proud": int(request.form['proud']), 
+            "strong": int(request.form['strong']), 
+            "determined": int(request.form['determined']), 
+            "active": int(request.form['active']), 
+            "upset": int(request.form['upset']), 
+            "jittery": int(request.form['jittery']), 
+            "nervous": int(request.form['nervous']), 
+            "distressed": int(request.form['distressed']), 
+            "guilty": int(request.form['guilty']), 
+            "ashamed": int(request.form['ashamed']), 
+            "hostile": int(request.form['hostile']), 
+            "irritable": int(request.form['irritable']), 
+            "scared": int(request.form['scared']), 
+            "afraid": int(request.form['afraid']), 
         }
     return {"result": get_affective_state_from_panas(panas_scores)}
 
