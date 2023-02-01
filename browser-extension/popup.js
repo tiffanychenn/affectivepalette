@@ -64,15 +64,17 @@ const _submitPanasForm = () => {
 const checkEmotionReaderType = () => {
   chrome.storage.local.get(["AffectivePaletteStatus"]).then((result) => {
     const t = result["AffectivePaletteStatus"];
-    console.log(t);
     if (t === "questionnaire") {
       document.getElementById("questionnaire").setAttribute("checked", "true");
+      document.getElementById("panas").setAttribute('style', 'visibility: visible');
     }
     else if (t === "article") {
       document.getElementById("article").setAttribute("checked", "true");
+      document.getElementById("panas").setAttribute('style', 'visibility: hidden');
     }
     else {
       document.getElementById("off").setAttribute("checked", "true");
+      document.getElementById("panas").setAttribute('style', 'visibility: hidden');
     }
   });
 }
@@ -88,6 +90,12 @@ document.querySelectorAll('input[name="type"]').forEach((el) =>
     const v = document.querySelector('input[name="type"]:checked').value;
     chrome.storage.local.set({"AffectivePaletteStatus": v}).then(() => {
       console.log("set to " + v);
+      if (v === "questionnaire") {
+        document.getElementById("panas").setAttribute('style', 'visibility: visible');
+      }
+      else {
+        document.getElementById("panas").setAttribute('style', 'visibility: hidden');
+      }
     });
   })
 );
